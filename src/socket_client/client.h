@@ -1,5 +1,7 @@
 // isp
 int rk_isp_set(const char *json);
+int rk_isp_get_scenario(int cam_id, char **value);
+int rk_isp_set_scenario(int cam_id, const char *value);
 // isp adjustment
 int rk_isp_get_contrast(int cam_id, int *value);
 int rk_isp_set_contrast(int cam_id, int value);

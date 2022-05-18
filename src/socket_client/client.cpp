@@ -130,6 +130,14 @@ int rk_isp_set(const char *json) {
   return rk_client_set_string((char *)__func__, json);
 }
 
+int rk_isp_get_scenario(int cam_id, char **value) {
+  return rk_client_get_string_by_id((char *)__func__, cam_id, value);
+}
+
+int rk_isp_set_scenario(int cam_id, const char *value) {
+  return rk_client_set_string_by_id((char *)__func__, cam_id, value);
+}
+
 int rk_audio_set(const char *json) {
   return rk_client_set_string((char *)__func__, json);
 }
