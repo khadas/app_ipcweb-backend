@@ -313,8 +313,6 @@ void image_specific_resource_set(std::string string, nlohmann::json data, int ca
 void ImageApiHandler::handler(const HttpRequest &Req, HttpResponse &Resp) {
   int cam_id = 0;
   nlohmann::json content;
-  nlohmann::json scenario;
-  std::string scenario_str = "";
   std::string path_api_resource = "";
   std::string path_channel_resource = "";
   std::string path_specific_resource = "";

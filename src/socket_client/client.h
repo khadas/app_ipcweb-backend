@@ -114,6 +114,17 @@ int rk_video_get_frame_rate_in(int stream_id, char **value);
 int rk_video_set_frame_rate_in(int stream_id, const char *value);
 // audio
 int rk_audio_set(const char *json);
+int rk_audio_restart();
+int rk_audio_get_bit_rate(int stream_id, int *value);
+int rk_audio_set_bit_rate(int stream_id, int value);
+int rk_audio_get_sample_rate(int stream_id, int *value);
+int rk_audio_set_sample_rate(int stream_id, int value);
+int rk_audio_get_volume(int stream_id, int *value);
+int rk_audio_set_volume(int stream_id, int value);
+int rk_audio_get_enable_vqe(int stream_id, int *value);
+int rk_audio_set_enable_vqe(int stream_id, int value);
+int rk_audio_get_encode_type(int stream_id, char **value);
+int rk_audio_set_encode_type(int stream_id, const char *value);
 // system
 int rk_system_capability_get_video(char *value);
 int rk_system_capability_get_image_adjustment(char *value);

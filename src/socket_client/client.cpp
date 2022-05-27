@@ -138,10 +138,6 @@ int rk_isp_set_scenario(int cam_id, const char *value) {
   return rk_client_set_string_by_id((char *)__func__, cam_id, value);
 }
 
-int rk_audio_set(const char *json) {
-  return rk_client_set_string((char *)__func__, json);
-}
-
 int rk_isp_get_contrast(int cam_id, int *value) {
   return rk_client_get_int_by_id((char *)__func__, cam_id, value);
 }
@@ -610,6 +606,64 @@ int rk_video_get_frame_rate_in(int stream_id, char **value) {
 }
 
 int rk_video_set_frame_rate_in(int stream_id, const char *value) {
+  return rk_client_set_string_by_id((char *)__func__, stream_id, value);
+}
+
+// audio
+int rk_audio_set(const char *json) {
+  return rk_client_set_string((char *)__func__, json);
+}
+
+int rk_audio_restart() {
+  int fd;
+  int ret = 0;
+
+  fd = cli_begin((char *)__func__);
+  /* Transmission parameters */
+  sock_read(fd, &ret, sizeof(int));
+  /* End transmission parameters */
+  ret = cli_end(fd);
+
+  return ret;
+}
+
+int rk_audio_get_bit_rate(int stream_id, int *value) {
+  return rk_client_get_int_by_id((char *)__func__, stream_id, value);
+}
+
+int rk_audio_set_bit_rate(int stream_id, int value) {
+  return rk_client_set_int_by_id((char *)__func__, stream_id, value);
+}
+
+int rk_audio_get_sample_rate(int stream_id, int *value) {
+  return rk_client_get_int_by_id((char *)__func__, stream_id, value);
+}
+
+int rk_audio_set_sample_rate(int stream_id, int value) {
+  return rk_client_set_int_by_id((char *)__func__, stream_id, value);
+}
+
+int rk_audio_get_volume(int stream_id, int *value) {
+  return rk_client_get_int_by_id((char *)__func__, stream_id, value);
+}
+
+int rk_audio_set_volume(int stream_id, int value) {
+  return rk_client_set_int_by_id((char *)__func__, stream_id, value);
+}
+
+int rk_audio_get_enable_vqe(int stream_id, int *value) {
+  return rk_client_get_int_by_id((char *)__func__, stream_id, value);
+}
+
+int rk_audio_set_enable_vqe(int stream_id, int value) {
+  return rk_client_set_int_by_id((char *)__func__, stream_id, value);
+}
+
+int rk_audio_get_encode_type(int stream_id, char **value) {
+  return rk_client_get_string_by_id((char *)__func__, stream_id, value);
+}
+
+int rk_audio_set_encode_type(int stream_id, const char *value) {
   return rk_client_set_string_by_id((char *)__func__, stream_id, value);
 }
 
