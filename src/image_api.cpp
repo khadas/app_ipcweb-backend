@@ -48,6 +48,10 @@ nlohmann::json image_specific_resource_get(std::string string, int cam_id) {
     specific_resource.emplace("sFillLightMode", tmp);
     rk_isp_get_light_brightness(cam_id, &value_int);
     specific_resource.emplace("iLightBrightness", value_int);
+    rk_isp_get_night_to_day_filter_level(cam_id, &value_int);
+    specific_resource.emplace("iNightToDayFilterLevel", value_int);
+    rk_isp_get_night_to_day_filter_time(cam_id, &value_int);
+    specific_resource.emplace("iNightToDayFilterTime", value_int);
   } else if (!string.compare(PATH_IMAGE_BLC)) {
     rk_isp_get_hdr(cam_id, &tmp);
     specific_resource.emplace("sHDR", tmp);
@@ -195,6 +199,14 @@ void image_specific_resource_set(std::string string, nlohmann::json data, int ca
     if (data.dump().find("iLightBrightness") != data.dump().npos) {
       value_int = atoi(data.at("iLightBrightness").dump().c_str());
       rk_isp_set_light_brightness(cam_id, value_int);
+    }
+    if (data.dump().find("iNightToDayFilterLevel") != data.dump().npos) {
+      value_int = atoi(data.at("iNightToDayFilterLevel").dump().c_str());
+      rk_isp_set_night_to_day_filter_level(cam_id, value_int);
+    }
+    if (data.dump().find("iNightToDayFilterTime") != data.dump().npos) {
+      value_int = atoi(data.at("iNightToDayFilterTime").dump().c_str());
+      rk_isp_set_night_to_day_filter_time(cam_id, value_int);
     }
   } else if (!string.compare(PATH_IMAGE_BLC)) {
     if (data.dump().find("sBLCRegion") != data.dump().npos) {

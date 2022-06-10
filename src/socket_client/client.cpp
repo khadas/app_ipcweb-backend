@@ -236,6 +236,22 @@ int rk_isp_set_light_brightness(int cam_id, int value) {
   return rk_client_set_int_by_id((char *)__func__, cam_id, value);
 }
 
+int rk_isp_get_night_to_day_filter_level(int cam_id, int *value) {
+  return rk_client_get_int_by_id((char *)__func__, cam_id, value);
+}
+
+int rk_isp_set_night_to_day_filter_level(int cam_id, int value) {
+  return rk_client_set_int_by_id((char *)__func__, cam_id, value);
+}
+
+int rk_isp_get_night_to_day_filter_time(int cam_id, int *value) {
+  return rk_client_get_int_by_id((char *)__func__, cam_id, value);
+}
+
+int rk_isp_set_night_to_day_filter_time(int cam_id, int value) {
+  return rk_client_set_int_by_id((char *)__func__, cam_id, value);
+}
+
 // blc
 int rk_isp_get_hdr(int cam_id, char **value) {
   return rk_client_get_string_by_id((char *)__func__, cam_id, value);
