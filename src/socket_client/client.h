@@ -22,6 +22,8 @@ int rk_isp_get_exposure_time(int cam_id, char **value);
 int rk_isp_set_exposure_time(int cam_id, const char *value);
 int rk_isp_get_exposure_gain(int cam_id, int *value);
 int rk_isp_set_exposure_gain(int cam_id, int value);
+int rk_isp_get_frame_rate(int cam_id, int *value);
+int rk_isp_set_frame_rate(int cam_id, int value);
 // night_to_day
 int rk_isp_get_night_to_day(int cam_id, char **value);
 int rk_isp_set_night_to_day(int cam_id, const char *value);

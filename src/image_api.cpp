@@ -41,6 +41,8 @@ nlohmann::json image_specific_resource_get(std::string string, int cam_id) {
     specific_resource.emplace("sExposureTime", tmp);
     rk_isp_get_exposure_gain(cam_id, &value_int);
     specific_resource.emplace("iExposureGain", value_int);
+    rk_isp_get_frame_rate(cam_id, &value_int);
+    specific_resource.emplace("iFPS", value_int);
   } else if (!string.compare(PATH_IMAGE_NIGHT_TO_DAY)) {
     rk_isp_get_night_to_day(cam_id, &tmp);
     specific_resource.emplace("sNightToDay", tmp);
@@ -184,6 +186,10 @@ void image_specific_resource_set(std::string string, nlohmann::json data, int ca
       value = data.at("sGainMode").dump();
       value.erase(0, 1).erase(value.end() - 1, value.end()); // erase \"
       rk_isp_set_gain_mode(cam_id, value.c_str());
+    }
+    if (data.dump().find("iFPS") != data.dump().npos) {
+      value_int = atoi(data.at("iFPS").dump().c_str());
+      rk_isp_set_frame_rate(cam_id, value_int);
     }
   } else if (!string.compare(PATH_IMAGE_NIGHT_TO_DAY)) {
     if (data.dump().find("sNightToDay") != data.dump().npos) {

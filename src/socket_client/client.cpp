@@ -211,6 +211,14 @@ int rk_isp_set_exposure_gain(int cam_id, int value) {
   return rk_client_set_int_by_id((char *)__func__, cam_id, value);
 }
 
+int rk_isp_get_frame_rate(int cam_id, int *value) {
+  return rk_client_get_int_by_id((char *)__func__, cam_id, value);
+}
+
+int rk_isp_set_frame_rate(int cam_id, int value) {
+  return rk_client_set_int_by_id((char *)__func__, cam_id, value);
+}
+
 // night_to_day
 int rk_isp_get_night_to_day(int cam_id, char **value) {
   return rk_client_get_string_by_id((char *)__func__, cam_id, value);
