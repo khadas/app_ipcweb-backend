@@ -102,6 +102,8 @@ nlohmann::json image_specific_resource_get(std::string string, int cam_id) {
     specific_resource.emplace("sPowerLineFrequencyMode", tmp);
     rk_isp_get_image_flip(cam_id, &tmp);
     specific_resource.emplace("sImageFlip", tmp);
+    rk_video_get_rotation(&value_int);
+    specific_resource.emplace("iImageRotation", value_int);
   } else if (!string.compare(PATH_IMAGE_AF)) {
     rk_isp_get_af_mode(cam_id, &tmp);
     specific_resource.emplace("sAFMode", tmp);
@@ -312,6 +314,10 @@ void image_specific_resource_set(std::string string, nlohmann::json data, int ca
       value = data.at("sImageFlip").dump();
       value.erase(0, 1).erase(value.end() - 1, value.end()); // erase \"
       rk_isp_set_image_flip(cam_id, value.c_str());
+    }
+    if (data.dump().find("iImageRotation") != data.dump().npos) {
+      value_int = atoi(data.at("iImageRotation").dump().c_str());
+      rk_video_set_rotation(value_int);
     }
   } else if (!string.compare(PATH_IMAGE_AF)) {
     if (data.dump().find("sAFMode") != data.dump().npos) {

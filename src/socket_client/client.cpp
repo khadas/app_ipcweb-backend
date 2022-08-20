@@ -633,6 +633,14 @@ int rk_video_set_frame_rate_in(int stream_id, const char *value) {
   return rk_client_set_string_by_id((char *)__func__, stream_id, value);
 }
 
+int rk_video_get_rotation(int *value) {
+  return rk_client_get_int((char *)__func__, value);
+}
+
+int rk_video_set_rotation(int value) {
+  return rk_client_set_int((char *)__func__, value);
+}
+
 // audio
 int rk_audio_set(const char *json) {
   return rk_client_set_string((char *)__func__, json);
