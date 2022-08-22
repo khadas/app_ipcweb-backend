@@ -279,11 +279,28 @@ int user_alter_verify(nlohmann::json put_info) {
 nlohmann::json GetPara(std::string para_name) {
   nlohmann::json content;
   if (!para_name.compare("screenshot")) {
-    content = "";
+    content =
+        "{\"dynamic\":{\"id\":{\"0\":{\"iShotInterval\":{\"for\":\"timing\","
+        "\"range\":{\"max\":604800000,\"min\":1000},\"type\":\"range\"},"
+        "\"timeUnit\":{\"for\":\"timing\",\"options\":[\"seconds\",\"minutes\","
+        "\"hours\",\"days\"],\"type\":\"options\"}},\"1\":{\"iShotInterval\":{"
+        "\"for\":\"timing\",\"range\":{\"max\":65535,\"min\":1000},\"type\":"
+        "\"range\"},\"timeUnit\":{\"for\":\"timing\",\"options\":[\"seconds\","
+        "\"minutes\"],\"type\":\"options\"}}}},\"relation\":{\"iImageQuality\":"
+        "{\"50\":\"low\",\"70\":\"middle\",\"90\":\"high\"}},\"static\":{"
+        "\"iImageQuality\":{\"options\":[50,70,90],\"type\":\"options\"},"
+        "\"iShotNumber\":{\"range\":{\"max\":120,\"min\":1},\"type\":\"range\"}"
+        ",\"sImageType\":{\"options\":[\"JPEG\"],\"type\":\"options\"},"
+        "\"sResolution\":{\"refer\":[4,\"para\",\"dynamic\",\"sStreamType\","
+        "\"mainStream\",\"sResolution\"],\"type\":\"refer\"}}}";
   } else if (!para_name.compare("screenshot-schedule")) {
-    content = "";
+    content = "[{\"color\":\"#87CEEB\",\"name\":\"timing\"}]";
   } else if (!para_name.compare("video-plan-schedule")) {
-    content = "";
+    content = "[{\"color\":\"#87CEEB\",\"name\":\"timing\"},{\"color\":\"#"
+              "74B558\",\"name\":\"motion-detect\"},{\"color\":\"#D71820\","
+              "\"name\":\"alarm\"},{\"color\":\"#E58705\",\"name\":"
+              "\"motionOrAlarm\"},{\"color\":\"#B9E2FE\",\"name\":"
+              "\"motionAndAlarm\"},{\"color\":\"#AA6FFF\",\"name\":\"event\"}]";
   } else if (!para_name.compare("smart-cover")) {
     content = "";
   } else if (!para_name.compare("video-encoder")) {
@@ -428,7 +445,7 @@ nlohmann::json GetPara(std::string para_name) {
         "\"IntrusionDetection\"},{\"auth\":-1,\"name\":\"AlarmInput\"},{"
         "\"auth\":-1,\"name\":\"AlarmOutput\"},{\"auth\":-1,\"name\":"
         "\"Abnormal\"}],\"name\":\"Event\"},{\"auth\":1,\"item\":[{\"auth\":1,"
-        "\"item\":[{\"auth\":1,\"name\":\"VideoPlan\"},{\"auth\":1,\"name\":"
+        "\"item\":[{\"auth\":1,\"name\":"
         "\"ScreenshotPlan\"},{\"auth\":1,\"name\":\"ScreenshotPara\"}],"
         "\"name\":\"PlanSettings\"},{\"auth\":1,\"item\":[{\"auth\":1,\"name\":"
         "\"HardDiskManagement\"},{\"auth\":-1,\"name\":\"NAS\"},{\"auth\":-1,"

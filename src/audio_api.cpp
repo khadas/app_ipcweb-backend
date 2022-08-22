@@ -61,7 +61,7 @@ int audio_set_param(int stream_id, nlohmann::json param) {
   if (param.dump().find("sVQE") != param.dump().npos) {
     value = param.at("sVQE").dump();
     value.erase(0, 1).erase(value.end() - 1, value.end()); // erase \"
-    if(!strcmp(value.c_str(), "open"))
+    if (!strcmp(value.c_str(), "open"))
       rk_audio_set_enable_vqe(stream_id, 1);
     else
       rk_audio_set_enable_vqe(stream_id, 0);

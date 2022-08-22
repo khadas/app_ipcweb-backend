@@ -12,6 +12,54 @@ namespace cgi {
 
 #ifdef USE_RKIPC
 
+nlohmann::json get_snap_plan_0() {
+  nlohmann::json param;
+  char *tmp = new char[20];
+  int value = 0;
+
+  param.emplace("id", 0);
+  param.emplace("iShotNumber", 1);
+  param.emplace("sImageType", "JPEG");
+
+  rk_video_get_enable_cycle_snapshot(&value);
+  param.emplace("iEnabled", value);
+  rk_video_get_image_quality(&value);
+  param.emplace("iImageQuality", value);
+  rk_video_get_snapshot_interval_ms(&value);
+  param.emplace("iShotInterval", value);
+
+  rk_video_get_jpeg_resolution(&tmp);
+  param.emplace("sResolution", tmp);
+  delete[] tmp;
+
+  return param;
+}
+
+int set_snap_plan_0(nlohmann::json param) {
+  int value_int;
+  std::string value;
+
+  if (param.dump().find("iEnabled") != param.dump().npos) {
+    value_int = atoi(param.at("iEnabled").dump().c_str());
+    rk_video_set_enable_cycle_snapshot(value_int);
+  }
+  if (param.dump().find("iImageQuality") != param.dump().npos) {
+    value_int = atoi(param.at("iImageQuality").dump().c_str());
+    rk_video_set_image_quality(value_int);
+  }
+  if (param.dump().find("iShotInterval") != param.dump().npos) {
+    value_int = atoi(param.at("iShotInterval").dump().c_str());
+    rk_video_set_snapshot_interval_ms(value_int);
+  }
+  if (param.dump().find("sResolution") != param.dump().npos) {
+    value = param.at("sResolution").dump();
+    value.erase(0, 1).erase(value.end() - 1, value.end()); // erase \"
+    rk_video_set_jpeg_resolution(value.c_str());
+  }
+
+  return 0;
+}
+
 void StorageApiHandler::handler(const HttpRequest &Req, HttpResponse &Resp) {
   int hdd_id = 3;
   std::string path_api_resource;
@@ -106,13 +154,21 @@ void StorageApiHandler::handler(const HttpRequest &Req, HttpResponse &Resp) {
       } else {
         hdd_id = atoi(path_hdd_id.substr(0, path_hdd_id.size()).c_str());
         if (hdd_id == 0) { /* path is storage/snap-plan/0 */
-          // content = storage_plan_get(hdd_id);
-          // content.erase("iShotNumber");
+          content = get_snap_plan_0();
           Resp.setHeader(HttpStatus::kOk, "OK");
           Resp.setApiData(content);
         } else if (hdd_id == 1) { /* path is storage/snap-plan/1 */
-          // content = storage_plan_get(hdd_id);
-          // Resp.setHeader(HttpStatus::kOk, "OK");
+          content = R"(
+            {
+                "iEnabled": 0,
+                "iImageQuality": 90,
+                "iShotInterval": 1000,
+                "iShotNumber": 4,
+                "id": 1,
+                "sImageType": "JPEG",
+                "sResolution": "1920*1080"
+            }
+          )"_json;
           Resp.setApiData(content);
         } else {
           Resp.setErrorResponse(HttpStatus::kNotImplemented, "Not Implemented");
@@ -235,23 +291,19 @@ void StorageApiHandler::handler(const HttpRequest &Req, HttpResponse &Resp) {
       } else {
         hdd_id = atoi(path_hdd_id.substr(0, path_hdd_id.size()).c_str());
         if (hdd_id == 0) { /* path is storage/snap-plan/0 */
-          // /* Erase unchanged data */
-          // cfg_old = storage_plan_get(0);
-          // cfg_old.erase("iShotNumber");
-          // diff = nlohmann::json::diff(cfg_old, storage_config);
-          // for (auto &x : nlohmann::json::iterator_wrapper(cfg_old)) {
-          //   if (diff.dump().find(x.key()) == diff.dump().npos)
-          //     storage_config.erase(x.key());
-          // }
-          // /* Set */
-          // if (!storage_config.empty()) {
-          //   dbserver_set_storage_plan_snap(
-          //       (char *)storage_config.dump().c_str(), 0);
-          //   mediaserver_sync_schedules();
-          // }
-          // /* Get new info */
-          // content = storage_plan_get(0);
-          // content.erase("iShotNumber");
+
+          /* Erase unchanged data */
+          cfg_old = get_snap_plan_0();
+          diff = nlohmann::json::diff(cfg_old, storage_config);
+          for (auto &x : nlohmann::json::iterator_wrapper(cfg_old)) {
+            if (diff.dump().find(x.key()) == diff.dump().npos)
+              storage_config.erase(x.key());
+          }
+          /* Set */
+          if (!storage_config.empty())
+            set_snap_plan_0(storage_config);
+          /* Get new info */
+          content = get_snap_plan_0();
           Resp.setHeader(HttpStatus::kOk, "OK");
           Resp.setApiData(content);
         } else if (hdd_id == 1) { /* path is storage/snap-plan/1 */

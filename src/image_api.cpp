@@ -128,20 +128,25 @@ nlohmann::json image_channel_resource_get(int cam_id) {
                    image_specific_resource_get(PATH_IMAGE_ADJUSTMENT, cam_id));
   resource.emplace(KEY_IMAGE_EXPOSURE,
                    image_specific_resource_get(PATH_IMAGE_EXPOSURE, cam_id));
-  resource.emplace(KEY_IMAGE_NIGHT_TO_DAY,
-                   image_specific_resource_get(PATH_IMAGE_NIGHT_TO_DAY, cam_id));
-  resource.emplace(KEY_IMAGE_BLC, image_specific_resource_get(PATH_IMAGE_BLC, cam_id));
-  resource.emplace(KEY_IMAGE_WHITE_BLANCE,
-                   image_specific_resource_get(PATH_IMAGE_WHITE_BLANCE, cam_id));
+  resource.emplace(
+      KEY_IMAGE_NIGHT_TO_DAY,
+      image_specific_resource_get(PATH_IMAGE_NIGHT_TO_DAY, cam_id));
+  resource.emplace(KEY_IMAGE_BLC,
+                   image_specific_resource_get(PATH_IMAGE_BLC, cam_id));
+  resource.emplace(
+      KEY_IMAGE_WHITE_BLANCE,
+      image_specific_resource_get(PATH_IMAGE_WHITE_BLANCE, cam_id));
   resource.emplace(KEY_IMAGE_ENHANCEMENT,
                    image_specific_resource_get(PATH_IMAGE_ENHANCEMENT, cam_id));
-  resource.emplace(KEY_IMAGE_VIDEO_ADJUSTMEN,
-                   image_specific_resource_get(PATH_IMAGE_VIDEO_ADJUSTMEN, cam_id));
+  resource.emplace(
+      KEY_IMAGE_VIDEO_ADJUSTMEN,
+      image_specific_resource_get(PATH_IMAGE_VIDEO_ADJUSTMEN, cam_id));
 
   return resource;
 }
 
-void image_specific_resource_set(std::string string, nlohmann::json data, int cam_id) {
+void image_specific_resource_set(std::string string, nlohmann::json data,
+                                 int cam_id) {
   char *table;
   int value_int;
   std::string value;
@@ -433,7 +438,8 @@ void ImageApiHandler::handler(const HttpRequest &Req, HttpResponse &Resp) {
       } else {
         // TODO: only set diff
         /* Set */
-        image_specific_resource_set(path_specific_resource, image_config, cam_id);
+        image_specific_resource_set(path_specific_resource, image_config,
+                                    cam_id);
         /* Get new info */
         content = image_specific_resource_get(path_specific_resource, cam_id);
       }

@@ -641,6 +641,39 @@ int rk_video_set_rotation(int value) {
   return rk_client_set_int((char *)__func__, value);
 }
 
+// jpeg
+int rk_video_get_enable_cycle_snapshot(int *value) {
+  return rk_client_get_int((char *)__func__, value);
+}
+
+int rk_video_set_enable_cycle_snapshot(int value) {
+  return rk_client_set_int((char *)__func__, value);
+}
+
+int rk_video_get_image_quality(int *value) {
+  return rk_client_get_int((char *)__func__, value);
+}
+
+int rk_video_set_image_quality(int value) {
+  return rk_client_set_int((char *)__func__, value);
+}
+
+int rk_video_get_snapshot_interval_ms(int *value) {
+  return rk_client_get_int((char *)__func__, value);
+}
+
+int rk_video_set_snapshot_interval_ms(int value) {
+  return rk_client_set_int((char *)__func__, value);
+}
+
+int rk_video_get_jpeg_resolution(char **value) {
+  return rk_client_get_string((char *)__func__, value);
+}
+
+int rk_video_set_jpeg_resolution(const char *value) {
+  return rk_client_set_string((char *)__func__, value);
+}
+
 // audio
 int rk_audio_set(const char *json) {
   return rk_client_set_string((char *)__func__, json);

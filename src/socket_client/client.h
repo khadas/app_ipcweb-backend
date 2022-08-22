@@ -120,6 +120,15 @@ int rk_video_get_frame_rate_in(int stream_id, char **value);
 int rk_video_set_frame_rate_in(int stream_id, const char *value);
 int rk_video_get_rotation(int *value);
 int rk_video_set_rotation(int value);
+// jpeg
+int rk_video_get_enable_cycle_snapshot(int *value);
+int rk_video_set_enable_cycle_snapshot(int value);
+int rk_video_get_image_quality(int *value);
+int rk_video_set_image_quality(int value);
+int rk_video_get_snapshot_interval_ms(int *value);
+int rk_video_set_snapshot_interval_ms(int value);
+int rk_video_get_jpeg_resolution(char **value);
+int rk_video_set_jpeg_resolution(const char *value);
 // audio
 int rk_audio_set(const char *json);
 int rk_audio_restart();
