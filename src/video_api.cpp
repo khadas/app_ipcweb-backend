@@ -48,8 +48,8 @@ nlohmann::json video_param_get(int stream_id) {
   rk_video_get_smart(stream_id, &tmp);
   param.emplace("sSmart", tmp);
 
-  rk_video_get_svc(stream_id, &tmp);
-  param.emplace("sSVC", tmp);
+  rk_video_get_gop_mode(stream_id, &tmp);
+  param.emplace("sGOPMode", tmp);
 
   rk_video_get_stream_type(stream_id, &tmp);
   param.emplace("sStreamType", tmp);
@@ -71,7 +71,6 @@ nlohmann::json video_param_get(int stream_id) {
   param.emplace("iStreamSmooth", 50);
   param.emplace("iMinRate", 0);
   param.emplace("iTargetRate", 0);
-  param.emplace("sSVC", "close");
   param.emplace("sVideoType", "compositeStream");
 
   return param;
@@ -109,10 +108,10 @@ int video_set_param(int stream_id, nlohmann::json param) {
     value.erase(0, 1).erase(value.end() - 1, value.end()); // erase \"
     rk_video_set_smart(stream_id, value.c_str());
   }
-  if (param.dump().find("sSVC") != param.dump().npos) {
-    value = param.at("sSVC").dump();
+  if (param.dump().find("sGOPMode") != param.dump().npos) {
+    value = param.at("sGOPMode").dump();
     value.erase(0, 1).erase(value.end() - 1, value.end()); // erase \"
-    rk_video_set_svc(stream_id, value.c_str());
+    rk_video_set_gop_mode(stream_id, value.c_str());
   }
   if (param.dump().find("sStreamType") != param.dump().npos) {
     value = param.at("sStreamType").dump();
