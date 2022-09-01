@@ -252,6 +252,8 @@
   "smart": "Smart",
   "IFrameInterval": "I帧间隔",
   "GOP": "I帧间隔",
+  "GOPMode": "GOP模式",
+
   "audioCodec": "音频编码",
   "audioInput": "音频输入",
   "sampleRate": "采样率",
@@ -259,7 +261,7 @@
   "micIn": "Mic In",
   "lineIn": "Line In",
   "inputVolume": "输入音量",
-  "noiseFiltering": "环境噪声过滤",
+  "VQE": "语音质量增强",
 
   "open": "开启",
   "close": "关闭",
@@ -399,7 +401,7 @@
   "LDCH": "LDCH",
   "ldchLevel": "LDCH等级",
   "distortionCorrectionLevel": "LDCH级别",
-  "imageRotation": "图像旋转角",
+  "imageRotation": "旋转",
 
   "videoAdjustment": "视频调整",
   "mirror": "镜像",
@@ -418,6 +420,7 @@
   "videoStandard": "视频制式",
   "powerLineFrequencyMode": "视频制式",
   "videoInputMode": "视频输入模式",
+  "FPS": "帧率",
 
   "other": "其他",
   "localOutput": "本地输出",
