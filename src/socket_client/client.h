@@ -230,6 +230,8 @@ int rk_osd_get_display_text(int id, char **value);
 int rk_osd_set_display_text(int id, const char *value);
 int rk_osd_get_image_path(int id, char **value);
 int rk_osd_set_image_path(int id, const char *value);
+int rk_osd_get_style(int id, char **value);
+int rk_osd_set_style(int id, const char *value);
 int rk_osd_restart();
 // roi.x
 int rk_roi_get_stream_type(int id, char **value);

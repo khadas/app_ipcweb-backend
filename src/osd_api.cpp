@@ -166,6 +166,10 @@ nlohmann::json osd_privacy_mask_get() {
     rk_osd_get_height(i, &value);
     privacy_mask.emplace("iMaskHeight", value);
     privacy_mask.emplace("id", i - 4);
+    rk_osd_get_display_text(i, &tmp);
+    privacy_mask.emplace("sDisplayText", tmp);
+    rk_osd_get_style(i, &tmp);
+    privacy_mask.emplace("sStyle", tmp);
     all_privacy_mask.push_back(privacy_mask);
   }
   osd_privacy_mask.emplace("normalizedScreenSize", normalized_screen_size);
@@ -333,6 +337,8 @@ void osd_image_set(nlohmann::json osd_image_config) {
 
 void osd_privacy_mask_set(nlohmann::json osd_privacy_mask_config) {
   int value_int;
+  std::string value;
+
   for (auto &x : nlohmann::json::iterator_wrapper(osd_privacy_mask_config)) {
     if (x.key() == KEY_NORMALIZED_SCREEN_SIZE) {
       // auto val = x.value(); /* string or int */
@@ -365,6 +371,16 @@ void osd_privacy_mask_set(nlohmann::json osd_privacy_mask_config) {
         if (param.dump().find("iPositionY") != param.dump().npos) {
           value_int = atoi(param.at("iPositionY").dump().c_str());
           rk_osd_set_position_y(id + 4, value_int);
+        }
+        if (param.dump().find("sDisplayText") != param.dump().npos) {
+          value = param.at("sDisplayText").dump();
+          value.erase(0, 1).erase(value.end() - 1, value.end()); // erase \"
+          rk_osd_set_display_text(id + 4, value.c_str());
+        }
+        if (param.dump().find("sStyle") != param.dump().npos) {
+          value = param.at("sStyle").dump();
+          value.erase(0, 1).erase(value.end() - 1, value.end()); // erase \"
+          rk_osd_set_style(id + 4, value.c_str());
         }
         if (id == 1)
           break;

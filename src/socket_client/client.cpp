@@ -1214,6 +1214,14 @@ int rk_osd_set_image_path(int id, const char *value) {
   return rk_client_set_string_by_id((char *)__func__, id, value);
 }
 
+int rk_osd_get_style(int id, char **value) {
+  return rk_client_get_string_by_id((char *)__func__, id, value);
+}
+
+int rk_osd_set_style(int id, const char *value) {
+  return rk_client_set_string_by_id((char *)__func__, id, value);
+}
+
 int rk_osd_restart() {
   int fd;
   int ret = 0;
