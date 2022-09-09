@@ -487,6 +487,12 @@
   "yes": "确定",
   "no": "取消",
 
+  "areaList": "区域列表",
+  "privacyBlockTitle": "隐私块标题",
+  "style": "样式",
+  "cover": "遮盖",
+  "mosaic": "马赛克",
+
   "updatePicture": "上传图片",
   "updateFile": "上传",
   "overlaySetting": "图片叠加",
@@ -1109,4 +1115,6 @@
   "screenshot": "网页截图",
   "illegalStreamUrl": "非法直播流地址！",
   "onlySupportMain": "仅支持主码流！"
+
+
 }
