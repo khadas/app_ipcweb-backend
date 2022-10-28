@@ -104,10 +104,16 @@ std::string ipv4_address_get() {
   strncpy(ifr.ifr_name, "eth0", sizeof("eth0") - 1);
   ifr.ifr_name[IFNAMSIZ - 1] = '\0';
   ret = ioctl(sock, SIOCGIFADDR, &ifr);
-  if (ret == 0) {
-    sprintf(ip, "%s",
-            inet_ntoa(((struct sockaddr_in *)(&ifr.ifr_addr))->sin_addr));
+  if (ret) {
+    strncpy(ifr.ifr_name, "usb0", sizeof("usb0") - 1);
+    ret = ioctl(sock, SIOCGIFADDR, &ifr);
+    if (ret) {
+      strncpy(ifr.ifr_name, "wlan0", sizeof("wlan0") - 1);
+      ret = ioctl(sock, SIOCGIFADDR, &ifr);
+    }
   }
+  sprintf(ip, "%s", inet_ntoa(((struct sockaddr_in *)(&ifr.ifr_addr))->sin_addr));
+
   if (sock > 0) {
     close(sock);
   }
