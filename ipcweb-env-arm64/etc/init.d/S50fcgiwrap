@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DESC="Simple FastCGI wrapper for CGI scripts"
-DAEMON=/oem/usr/sbin/fcgiwrap
+DAEMON=/usr/sbin/fcgiwrap
 PIDFILE=/var/run/fcgiwrap.pid
 SOCKET=/run/fcgiwrap.sock
 USER=www-data
@@ -33,7 +33,7 @@ restart() {
 
 case "$1" in
 	start)
-		export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/oem/usr/lib
+		export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib
 		start
 		;;
 	stop)
