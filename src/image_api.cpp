@@ -19,7 +19,7 @@ nlohmann::json image_specific_resource_get(std::string string, int cam_id) {
       nlohmann::json::object(); /* one of all the same resources */
   minilog_debug("%s: string is %s\n", __func__, string.c_str());
   int value_int;
-  char *tmp = new char[20];
+  char *tmp = new char[256];
 
   if (!string.compare(PATH_IMAGE_ADJUSTMENT)) {
     rk_isp_get_brightness(cam_id, &value_int);
