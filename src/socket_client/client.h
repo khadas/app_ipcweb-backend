@@ -76,6 +76,8 @@ int rk_isp_get_dehaze_level(int cam_id, int *value);
 int rk_isp_set_dehaze_level(int cam_id, int value);
 int rk_isp_get_ldch_level(int cam_id, int *value);
 int rk_isp_set_ldch_level(int cam_id, int value);
+int rk_isp_get_fec_level(int cam_id, int *value);
+int rk_isp_set_fec_level(int cam_id, int value);
 // video_adjustment
 int rk_isp_get_power_line_frequency_mode(int cam_id, char **value);
 int rk_isp_set_power_line_frequency_mode(int cam_id, const char *value);

@@ -97,6 +97,8 @@ nlohmann::json image_specific_resource_get(std::string string, int cam_id) {
     specific_resource.emplace("iDehazeLevel", value_int);
     rk_isp_get_ldch_level(cam_id, &value_int);
     specific_resource.emplace("iLdchLevel", value_int);
+    rk_isp_get_fec_level(cam_id, &value_int);
+    specific_resource.emplace("iFecLevel", value_int);
   } else if (!string.compare(PATH_IMAGE_VIDEO_ADJUSTMEN)) {
     rk_isp_get_power_line_frequency_mode(cam_id, &tmp);
     specific_resource.emplace("sPowerLineFrequencyMode", tmp);
@@ -308,6 +310,10 @@ void image_specific_resource_set(std::string string, nlohmann::json data,
     if (data.dump().find("iLdchLevel") != data.dump().npos) {
       value_int = atoi(data.at("iLdchLevel").dump().c_str());
       rk_isp_set_ldch_level(cam_id, value_int);
+    }
+    if (data.dump().find("iFecLevel") != data.dump().npos) {
+      value_int = atoi(data.at("iFecLevel").dump().c_str());
+      rk_isp_set_fec_level(cam_id, value_int);
     }
   } else if (!string.compare(PATH_IMAGE_VIDEO_ADJUSTMEN)) {
     if (data.dump().find("sPowerLineFrequencyMode") != data.dump().npos) {
