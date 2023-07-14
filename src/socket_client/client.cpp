@@ -415,6 +415,14 @@ int rk_isp_set_ldch_level(int cam_id, int value) {
   return rk_client_set_int_by_id((char *)__func__, cam_id, value);
 }
 
+int rk_isp_get_fec_level(int cam_id, int *value) {
+  return rk_client_get_int_by_id((char *)__func__, cam_id, value);
+}
+
+int rk_isp_set_fec_level(int cam_id, int value) {
+  return rk_client_set_int_by_id((char *)__func__, cam_id, value);
+}
+
 // video_adjustment
 int rk_isp_get_power_line_frequency_mode(int cam_id, char **value) {
   return rk_client_get_string_by_id((char *)__func__, cam_id, value);
