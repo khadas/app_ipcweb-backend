@@ -72,14 +72,12 @@ nlohmann::json image_specific_resource_get(std::string string, int cam_id) {
   } else if (!string.compare(PATH_IMAGE_WHITE_BLANCE)) {
     rk_isp_get_white_blance_style(cam_id, &tmp);
     specific_resource.emplace("sWhiteBlanceStyle", tmp);
-    if (!strcmp(tmp, "manualWhiteBalance")) {
-      rk_isp_get_white_blance_red(cam_id, &value_int);
-      specific_resource.emplace("iWhiteBalanceRed", value_int);
-      rk_isp_get_white_blance_green(cam_id, &value_int);
-      specific_resource.emplace("iWhiteBalanceGreen", value_int);
-      rk_isp_get_white_blance_blue(cam_id, &value_int);
-      specific_resource.emplace("iWhiteBalanceBlue", value_int);
-    }
+    rk_isp_get_white_blance_red(cam_id, &value_int);
+    specific_resource.emplace("iWhiteBalanceRed", value_int);
+    rk_isp_get_white_blance_green(cam_id, &value_int);
+    specific_resource.emplace("iWhiteBalanceGreen", value_int);
+    rk_isp_get_white_blance_blue(cam_id, &value_int);
+    specific_resource.emplace("iWhiteBalanceBlue", value_int);
   } else if (!string.compare(PATH_IMAGE_ENHANCEMENT)) {
     rk_isp_get_noise_reduce_mode(cam_id, &tmp);
     specific_resource.emplace("sNoiseReduceMode", tmp);
